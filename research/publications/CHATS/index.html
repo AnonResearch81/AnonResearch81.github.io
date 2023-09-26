@@ -2,11 +2,251 @@
 <html>
 
 <head>
-    <title>My GitHub Pages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, width=device-width">
+    <style>
+        .image-container {
+            display: flex;
+        }
+
+        .image-box {
+            width: 800px;
+            height: 500px;
+            margin-right: 10px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .image-box2 {
+            width: 1000px;
+            height: 500px;
+            margin-right: 10px;
+        }
+
+        .image-box2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+    <title>CHATS</title>
+    <meta name="description" content="">
+    <meta name="author" content="AnonResearch81">
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
 </head>
 
 <body>
-    <h1>CHATS</h1>
+    <header>
+        <h1>Towards human-like spoken dialogue generation between AI agents from written dialogue</h1>
+        <p>
+            submitted to ICLR 2024<br>
+            Anonymous authors<br>
+            <br>
+            The advent of large language models (LLMs) has made it possible to generate natural written dialogues
+            between two agents.
+            However, generating human-like spoken dialogues from these written dialogues remains challenging.
+            Spoken dialogues have several unique characteristics: they frequently include backchannels and laughter, and
+            the smoothness of turn-takings significantly influences the fluidity of conversation.
+            In this study, we present <i>CHATS</i> ― <b>CH</b>atty <b>A</b>gents
+            <b>T</b>ext-to-<b>S</b>peech ― a discrete token-based system designed to generate spoken dialogues
+            based on written dialogues.
+            Our system can generate speech for both the speaker side and the listener side simultaneously, using only
+            the transcription from the speaker side, which eliminates the need for transcriptions of backchannels or
+            laughter.
+            Moreover, CHATS facilitates natural turn-taking; it determines the appropriate duration of silence after
+            each utterance when no overlap is present and, when overlap does occur, it initiates the generation of
+            overlapping speech based on the phoneme sequence of the next utterance.
+            Experimental evaluations indicate that CHATS outperforms standard text-to-speech baseline, producing spoken
+            dialogues that are not only more interactive and fluid but also retain clarity and intelligibility.
+        </p>
+        <div class="image-container">
+            <div class="image-box">
+                <img src="uLM_architecture.png">
+            </div>
+            <div class="image-box2">
+                <img src="diagram.png">
+            </div>
+        </div>
+    </header>
+
+    <h2>1. Spoken Dialogue Generation</h2>
+
+    <h3>Sample 1</h3>
+    <h4>Input written dialogue</h4>
+    <table border="1" class="inlineTable" id="TextTable1">
+        <col width="1000">
+        <col width="1000">
+
+        <tr>
+            <td>Original (Japanese)</td>
+            <td>Translated (English)</td>
+        </tr>
+        <tr>
+            <td>
+                A: 見たりしますね<br>
+                B: え、すごい、実写かぁ、えっ、エフェクトつける<br>
+                B: ってことはあれだよねー、あのー、編集して、実際の<br>
+                B: 動きは人間がやって、<br>
+                B: なんかやってみた感<br>
+                A: もうなんかこう、光をこう、ラケットとボールが当たる瞬間にこう入れてみたりとか<br>
+                A: なんかそのー、ボールがそのー、えー、コートに着地した時に、その着地したところが崩れるエフェクトがあって、なんか穴がコートに開くみたいな<br>
+                B: うわっ<br>
+                B: そこまでやっちゃうんだ<br>
+                A: そうなんですよ<br>
+            </td>
+            <td>
+                A: I do watch it.<br>
+                B: Oh, that's cool, it's live-action, huh, with effects.<br>
+                B: So that means, um, editing it, the actual<br>
+                B: movements are done by humans,<br>
+                B: kind of giving it a try.<br>
+                A: I just, like, tried adding light, like, at the moment the racket hits the ball,<br>
+                A: like, when the ball, um, lands on the court, there's an effect where the landing spot crumbles, like
+                a hole opens
+                up in the court.<br>
+                B: Woah<br>
+                B: You go that far.<br>
+                A: Yes, that's right.<br>
+            </td>
+        </tr>
+    </table>
+
+    <h4>Generated spoken dialogue</h4>
+    <div class="content-container">
+        <table border="1" class="inlineTable" id="AudioTable1">
+            <col width="300">
+            <col width="300">
+            <col width="300">
+            <col width="300">
+            <col width="300">
+
+            <tr>
+                <td>Ground Truth</td>
+                <td>Resynthesized</td>
+                <td>dGSLM</td>
+                <td>Baseline</td>
+                <td>Proposed</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <h3>Sample 2</h3>
+    <h4>Input written dialogue</h4>
+    <table border="1" class="inlineTable" id="TextTable2">
+        <col width="1000">
+        <col width="1000">
+
+        <tr>
+            <td>Original (Japanese)</td>
+            <td>Translated (English)</td>
+        </tr>
+        <tr>
+            <td>
+                B: なかなかないよね<br>
+                A: ふーん、自分で行く、よね、それこそファーストフード<br>
+                A: くらい、よ<br>
+                B: (L ふふふふはははは)<br>
+                A: お安い、回転寿司の方が落ち着くし<br>
+                A: ねー、いっぱい食べれるしね(L うふふふ)、そうなのよ、結局ね、結局そうなんですよ、結局、そうなる、そこに行くんです<br>
+                A: やっぱりすごいです<br>
+                B: うん、チェーン店は、偉大ということで<br>
+                B: はい、一旦これで、おわりでいい?<br>
+                A: はい、いいですかね<br>
+            </td>
+            <td>
+                B: It's pretty rare, isn't it?<br>
+                A: Hmm, you'd go there yourself, right, especially for fast food.<br>
+                A: At least, right.<br>
+                B: (L hahaha)<br>
+                A: It's cheaper, and I feel more at ease at conveyor belt sushi places.<br>
+                A: Right? You can eat a lot (L hehehe), exactly, in the end, that's what it comes down to, eventually,
+                that's where we go.<br>
+                A: It's really amazing.<br>
+                B: Yeah, chain stores are, in a sense, remarkable.<br>
+                B: Alright, can we conclude this for now?<br>
+                A: Yes, is that okay?<br>
+            </td>
+        </tr>
+    </table>
+
+
+    <h4>Generated spoken dialogue</h4>
+    <div class="content-container">
+        <table border="1" class="inlineTable" id="AudioTable2">
+            <col width="300">
+            <col width="300">
+            <col width="300">
+            <col width="300">
+            <col width="300">
+
+            <tr>
+                <td>Ground Truth</td>
+                <td>Resynthesized</td>
+                <td>dGSLM</td>
+                <td>Baseline</td>
+                <td>Proposed</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function handleWaveData(waveData, tableId) {
+            const table = document.getElementById(tableId);
+            const wavesurfers = [];
+
+            const row = table.insertRow(-1);
+
+            waveData.forEach((data, index) => {
+                // if (index === 0) {
+                //     const row = table.insertRow(-1);
+                // }
+                // const row = table.rows[1];
+                const cell = row.insertCell(-1);
+                cell.id = `cell_${data.cell}_header_waveform`;
+                const button = document.createElement('button');
+                button.id = `cell_${data.cell}_header`;
+                button.className = 'play-button-demo btn btn-primary';
+                button.innerHTML = '<i class="fa fa-play"></i> Play / <i class="fa fa-pause"></i> Pause';
+                button.addEventListener('click', () => wavesurfers[index].playPause());
+                cell.appendChild(button);
+
+                const wavesurfer = WaveSurfer.create({
+                    container: `#cell_${data.cell}_header_waveform`,
+                    waveColor: "skyblue",
+                    progressColor: "darkblue",
+                    splitChannels: true,
+                    responsive: true,
+                });
+
+                wavesurfer.load(data.path);
+                wavesurfers.push(wavesurfer);
+            });
+        }
+
+        const waveData1 = [
+            { path: './wav/mos/Ground_Truth/00029_00037_00001_00008_15_29.073041.wav', cell: '11' },
+            { path: './wav/mos/Resynthesized/00029_00037_00001_00008_15_29.073041.wav', cell: '12' },
+            { path: './wav/mos/dGSLM/00029_00037_00001_00008_15_29.073041.wav', cell: '13' },
+            { path: './wav/mos/Baseline/00029_00037_00001_00008_15_29.073041.wav', cell: '14' },
+            { path: './wav/mos/Proposed/00029_00037_00001_00008_15_29.073041.wav', cell: '15' },
+        ];
+        handleWaveData(waveData1, 'AudioTable1')
+
+        const waveData2 = [
+            { path: './wav/mos/Ground_Truth/00031_00040_00001_00010_23_31.675083.wav', cell: '21' },
+            { path: './wav/mos/Resynthesized/00031_00040_00001_00010_23_31.675083.wav', cell: '22' },
+            { path: './wav/mos/dGSLM/00031_00040_00001_00010_23_31.675083.wav', cell: '23' },
+            { path: './wav/mos/Baseline/00031_00040_00001_00010_23_31.675083.wav', cell: '24' },
+            { path: './wav/mos/Proposed/00031_00040_00001_00010_23_31.675083.wav', cell: '25' },
+        ];
+        handleWaveData(waveData2, 'AudioTable2')
+    </script>
+
 </body>
 
 </html>
