@@ -258,8 +258,48 @@
         </tr>
     </table>
 
-    <h3>Sample 2</h3>
+    <h3>Sample 1 with different speaker pairs</h3>
     <table border="1" class="inlineTable" id="MixTable2">
+        <col width="500">
+        <col width="500">
+        <col width="500">
+
+        <tr>
+            <td>Original (Japanese)</td>
+            <td>Translated (English)</td>
+            <td>Generated spoken dialogue (Proposed)</td>
+        </tr>
+        <tr>
+            <td>
+                B: あはは、サンタさんのシステムがよくできてるよね。<br>
+                B: 子供たちが信じてるうちは来るっていう。<br>
+                A: 本当に、信じる心が大事だよね。<br>
+                A: 大人になってもその気持ちを持ち続けたい。<br>
+                B: そうそう、でも実は大人になると、サンタさんの役割を果たすこともあるんだよね。<br>
+                A: うん、それがまた一つの魔法のようなものだよね。<br>
+                A: 子供たちの夢を守るための。<br>
+                B: 確かに。<br>
+                B: 自分が子供の頃、サンタさんからのプレゼントを待ってた気持ちを思い出して、それを次の世代にも伝えたい。<br>
+                A: それが一番のクリスマスの魔法だね。<br>
+            </td>
+            <td>
+                B: Haha, the system of Santa is well thought out, isn’t it?<br>
+                B: He comes as long as the children believe.<br>
+                A: Really, having a believing heart is important.<br>
+                A: I want to keep that feeling even as an adult.<br>
+                B: Exactly, but actually, when we become adults, sometimes we play the role of Santa.<br>
+                A: Yeah, that’s like a kind of magic, isn’t it?<br>
+                A: For protecting the dreams of the children.<br>
+                B: Definitely.<br>
+                B: I remember the feeling of waiting for presents from Santa when I was a child, and I want to pass that
+                on to the next generation.<br>
+                A: That’s the real magic of Christmas, isn’t it?<br>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Sample 2</h3>
+    <table border="1" class="inlineTable" id="MixTable3">
         <col width="500">
         <col width="500">
         <col width="500">
@@ -303,6 +343,53 @@
             </td>
         </tr>
     </table>
+
+    <h3>Sample 2 with different speaker pairs</h3>
+    <table border="1" class="inlineTable" id="MixTable4">
+        <col width="500">
+        <col width="500">
+        <col width="500">
+
+        <tr>
+            <td>Original (Japanese)</td>
+            <td>Translated (English)</td>
+            <td>Generated spoken dialogue (Proposed)</td>
+        </tr>
+        <tr>
+            <td>
+                A: お菓子とかお茶とか買って自分へのご褒美してるの？<br>
+                B: そうそう、そういう感じ！<br>
+                B: 特に気に入ってるスイーツとか、新しい飲み物が出てたら試してみたり。<br>
+                A: それいいね。<br>
+                A: 自分へのリワードって大切だと思う。<br>
+                A: 私も試験とか勉強がんばった時に、好きな映画を家で見たりしてる。<br>
+                B: ああ、それもいいね。<br>
+                B: やっぱり自分を褒めてあげることって大事。<br>
+                B: 自分の努力を認めて、次へのモチベーションにもつながるから。<br>
+                A: 本当に。<br>
+                A: それに、自分で自分を褒めることで、他人の評価に左右されなくなる気がするよね。<br>
+                B: うん、それもそうだね。<br>
+                B: 自分の価値を自分で見つけることができれば、心も安定するし、自信も持てるようになる。<br>
+            </td>
+            <td>
+                A: Are you treating yourself with sweets or tea or something?<br>
+                B: Yeah, exactly, that kind of feeling!<br>
+                B: Especially if there are sweets I like, or if there's a new drink, I like to try it.<br>
+                A: That's nice.<br>
+                A: I think rewarding oneself is important.<br>
+                A: When I work hard on exams or studying, I watch my favorite movies at home.<br>
+                B: Oh, that's also nice.<br>
+                B: It really is important to praise oneself.<br>
+                B: Recognizing one's own effort also connects to motivation for the next task.<br>
+                A: Absolutely.<br>
+                A: Also, by praising oneself, I feel like we become less affected by other people's evaluations.<br>
+                B: Yeah, that's true.<br>
+                B: If you can find your own value, you become more stable mentally, and you can also gain
+                confidence.<br>
+            </td>
+        </tr>
+    </table>
+
 
 
     <script>
@@ -369,9 +456,19 @@
         handleWaveData(waveData3, 'MixTable1', false)
 
         const waveData4 = [
-            { path: './wav/gpt4/00100_00075_00001_00001_5_27.096375.wav', cell: '41' },
+            { path: './wav/gpt4/00083_00031_00001_00004_4_26.433208.wav', cell: '41' },
         ];
         handleWaveData(waveData4, 'MixTable2', false)
+
+        const waveData5 = [
+            { path: './wav/gpt4/00100_00075_00001_00001_5_27.096375.wav', cell: '51' },
+        ];
+        handleWaveData(waveData5, 'MixTable3', false)
+
+        const waveData6 = [
+            { path: './wav/gpt4/00033_00028_00001_00001_5_27.096375.wav', cell: '61' },
+        ];
+        handleWaveData(waveData6, 'MixTable4', false)
 
     </script>
 
